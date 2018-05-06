@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.puao.dao.BallMapper">
+    <resultMap id="BaseResultMap" type="com.puao.bean.Ball">
+        <id column="period" property="period" jdbcType="INTEGER"/>
+        <result column="red_01" property="red_01" jdbcType="INTEGER"/>
+        <result column="red_02" property="red_02" jdbcType="INTEGER"/>
+        <result column="red_03" property="red_03" jdbcType="INTEGER"/>
+        <result column="red_04" property="red_04" jdbcType="INTEGER"/>
+        <result column="red_05" property="red_05" jdbcType="INTEGER"/>
+        <result column="red_06" property="red_06" jdbcType="INTEGER"/>
+        <result column="red_07" property="red_07" jdbcType="INTEGER"/>
+        <result column="red_08" property="red_08" jdbcType="INTEGER"/>
+        <result column="red_09" property="red_09" jdbcType="INTEGER"/>
+        <result column="red_10" property="red_10" jdbcType="INTEGER"/>
+        <result column="red_11" property="red_11" jdbcType="INTEGER"/>
+        <result column="red_12" property="red_12" jdbcType="INTEGER"/>
+        <result column="red_13" property="red_13" jdbcType="INTEGER"/>
+        <result column="red_14" property="red_14" jdbcType="INTEGER"/>
+        <result column="red_15" property="red_15" jdbcType="INTEGER"/>
+        <result column="red_16" property="red_16" jdbcType="INTEGER"/>
+        <result column="red_17" property="red_17" jdbcType="INTEGER"/>
+        <result column="red_18" property="red_18" jdbcType="INTEGER"/>
+        <result column="red_19" property="red_19" jdbcType="INTEGER"/>
+        <result column="red_20" property="red_20" jdbcType="INTEGER"/>
+        <result column="red_21" property="red_21" jdbcType="INTEGER"/>
+        <result column="red_22" property="red_22" jdbcType="INTEGER"/>
+        <result column="red_23" property="red_23" jdbcType="INTEGER"/>
+        <result column="red_24" property="red_24" jdbcType="INTEGER"/>
+        <result column="red_25" property="red_25" jdbcType="INTEGER"/>
+        <result column="red_26" property="red_26" jdbcType="INTEGER"/>
+        <result column="red_27" property="red_27" jdbcType="INTEGER"/>
+        <result column="red_28" property="red_28" jdbcType="INTEGER"/>
+        <result column="red_29" property="red_29" jdbcType="INTEGER"/>
+        <result column="red_30" property="red_30" jdbcType="INTEGER"/>
+        <result column="red_31" property="red_31" jdbcType="INTEGER"/>
+        <result column="red_32" property="red_32" jdbcType="INTEGER"/>
+        <result column="red_33" property="red_33" jdbcType="INTEGER"/>
+        <result column="red_34" property="red_34" jdbcType="INTEGER"/>
+        <result column="red_35" property="red_35" jdbcType="INTEGER"/>
+
+        <result column="blue_01" property="blue_01" jdbcType="INTEGER"/>
+        <result column="blue_02" property="blue_02" jdbcType="INTEGER"/>
+        <result column="blue_03" property="blue_03" jdbcType="INTEGER"/>
+        <result column="blue_04" property="blue_04" jdbcType="INTEGER"/>
+        <result column="blue_05" property="blue_05" jdbcType="INTEGER"/>
+        <result column="blue_06" property="blue_06" jdbcType="INTEGER"/>
+        <result column="blue_07" property="blue_07" jdbcType="INTEGER"/>
+        <result column="blue_08" property="blue_08" jdbcType="INTEGER"/>
+        <result column="blue_09" property="blue_09" jdbcType="INTEGER"/>
+        <result column="blue_10" property="blue_10" jdbcType="INTEGER"/>
+        <result column="blue_11" property="blue_11" jdbcType="INTEGER"/>
+        <result column="blue_12" property="blue_12" jdbcType="INTEGER"/>
+
+
+    </resultMap>
+    <sql id="Base_Column_List">
+		period,red_01,red_02,red_03,red_04,red_05,red_06,red_07,
+		red_08,red_09,red_10,red_11,red_12,red_13,red_14,red_15,
+		red_16,red_17,red_18,red_19,red_20,red_21,red_22,red_23,
+		red_24,red_25,red_26,red_27,red_28,red_29,red_30,red_31,
+		red_32,red_33,red_34,red_35,blue_01,blue_02,blue_03,blue_04,
+		blue_05,blue_06,blue_07,blue_08,blue_09,blue_10,blue_11,blue_12
+	</sql>
+
+    <!-- 查询唯一一条记录 -->
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="com.puao.bean.Ball">
+        select
+        <include refid="Base_Column_List"/>
+        from db_uim.t_ball_recode
+        <where>
+            <if test="period != null and period !=''">
+                and period = #{period,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY period ASC
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.puao.bean.Ball">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM db_uim.t_ball_recode
+        ORDER BY PERIOD ASC
+    </select>
+
+    <insert id="insertOrUpdate" parameterType="java.util.List">
+        INSERT INTO db_uim.t_ball_recode(
+        period,red_01,red_02,red_03,red_04,red_05,red_06,red_07,
+        red_08,red_09,red_10,red_11,red_12,red_13,red_14,red_15,
+        red_16,red_17,red_18,red_19,red_20,red_21,red_22,red_23,
+        red_24,red_25,red_26,red_27,red_28,red_29,red_30,red_31,
+        red_32,red_33,red_34,red_35,blue_01,blue_02,blue_03,blue_04,
+        blue_05,blue_06,blue_07,blue_08,blue_09,blue_10,blue_11,blue_12
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" open=""
+                 separator="," close="">
+            (
+            #{item.period,jdbcType=INTEGER},
+            #{item.red_01,jdbcType=INTEGER},#{item.red_02,jdbcType=INTEGER},#{item.red_03,jdbcType=INTEGER},
+            #{item.red_04,jdbcType=INTEGER},#{item.red_05,jdbcType=INTEGER},#{item.red_06,jdbcType=INTEGER},
+            #{item.red_07,jdbcType=INTEGER},#{item.red_08,jdbcType=INTEGER},#{item.red_09,jdbcType=INTEGER},
+            #{item.red_10,jdbcType=INTEGER},#{item.red_11,jdbcType=INTEGER},#{item.red_12,jdbcType=INTEGER},
+            #{item.red_13,jdbcType=INTEGER},#{item.red_14,jdbcType=INTEGER},#{item.red_15,jdbcType=INTEGER},
+            #{item.red_16,jdbcType=INTEGER},#{item.red_17,jdbcType=INTEGER},#{item.red_18,jdbcType=INTEGER},
+            #{item.red_19,jdbcType=INTEGER},#{item.red_20,jdbcType=INTEGER},#{item.red_21,jdbcType=INTEGER},
+            #{item.red_22,jdbcType=INTEGER},#{item.red_23,jdbcType=INTEGER},#{item.red_24,jdbcType=INTEGER},
+            #{item.red_25,jdbcType=INTEGER},#{item.red_26,jdbcType=INTEGER},#{item.red_27,jdbcType=INTEGER},
+            #{item.red_28,jdbcType=INTEGER},#{item.red_29,jdbcType=INTEGER},#{item.red_30,jdbcType=INTEGER},
+            #{item.red_31,jdbcType=INTEGER},#{item.red_32,jdbcType=INTEGER},#{item.red_33,jdbcType=INTEGER},
+            #{item.red_34,jdbcType=INTEGER},#{item.red_35,jdbcType=INTEGER},
+            #{item.blue_01,jdbcType=INTEGER},#{item.blue_02,jdbcType=INTEGER},#{item.blue_03,jdbcType=INTEGER},
+            #{item.blue_04,jdbcType=INTEGER},#{item.blue_05,jdbcType=INTEGER},#{item.blue_06,jdbcType=INTEGER},
+            #{item.blue_07,jdbcType=INTEGER},#{item.blue_08,jdbcType=INTEGER},#{item.blue_09,jdbcType=INTEGER},
+            #{item.blue_10,jdbcType=INTEGER},#{item.blue_11,jdbcType=INTEGER},#{item.blue_12,jdbcType=INTEGER}
+            )
+        </foreach>
+        ON conflict (period)
+        DO UPDATE SET
+        red_01 = EXCLUDED.red_01,
+        red_02 = EXCLUDED.red_02,
+        red_03 = EXCLUDED.red_03,
+        red_04 = EXCLUDED.red_04,
+        red_05 = EXCLUDED.red_05,
+        red_06 = EXCLUDED.red_06,
+        red_07 = EXCLUDED.red_07,
+        red_08 = EXCLUDED.red_08,
+        red_09 = EXCLUDED.red_09,
+        red_10 = EXCLUDED.red_10,
+        red_11 = EXCLUDED.red_11,
+        red_12 = EXCLUDED.red_12,
+        red_13 = EXCLUDED.red_13,
+        red_14 = EXCLUDED.red_14,
+        red_15 = EXCLUDED.red_15,
+        red_16 = EXCLUDED.red_16,
+        red_17 = EXCLUDED.red_17,
+        red_18 = EXCLUDED.red_18,
+        red_19 = EXCLUDED.red_19,
+        red_20 = EXCLUDED.red_20,
+        red_21 = EXCLUDED.red_21,
+        red_22 = EXCLUDED.red_22,
+        red_23 = EXCLUDED.red_23,
+        red_24 = EXCLUDED.red_24,
+        red_25 = EXCLUDED.red_25,
+        red_26 = EXCLUDED.red_26,
+        red_27 = EXCLUDED.red_27,
+        red_28 = EXCLUDED.red_28,
+        red_29 = EXCLUDED.red_29,
+        red_30 = EXCLUDED.red_30,
+        red_31 = EXCLUDED.red_31,
+        red_32 = EXCLUDED.red_32,
+        red_33 = EXCLUDED.red_33,
+        red_34 = EXCLUDED.red_34,
+        red_35 = EXCLUDED.red_35,
+        blue_01 = EXCLUDED.blue_01,
+        blue_02 = EXCLUDED.blue_02,
+        blue_03 = EXCLUDED.blue_03,
+        blue_04 = EXCLUDED.blue_04,
+        blue_05 = EXCLUDED.blue_05,
+        blue_06 = EXCLUDED.blue_06,
+        blue_07 = EXCLUDED.blue_07,
+        blue_08 = EXCLUDED.blue_08,
+        blue_09 = EXCLUDED.blue_09,
+        blue_10 = EXCLUDED.blue_10,
+        blue_11 = EXCLUDED.blue_11,
+        blue_12 = EXCLUDED.blue_12
+    </insert>
+
+    <select id="selectMaxPeriod" resultType="java.lang.Integer">
+        SELECT MAX(period) FROM db_uim.t_ball_recode
+    </select>
+
+
+    <select id="countByPeriod" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+            sum(red_01) as red_01,
+            sum(red_02) as red_02,
+            sum(red_03) as red_03,
+            sum(red_04) as red_04,
+            sum(red_05) as red_05,
+            sum(red_06) as red_06,
+            sum(red_07) as red_07,
+            sum(red_08) as red_08,
+            sum(red_09) as red_09,
+            sum(red_10) as red_10,
+            sum(red_11) as red_11,
+            sum(red_12) as red_12,
+            sum(red_13) as red_13,
+            sum(red_14) as red_14,
+            sum(red_15) as red_15,
+            sum(red_16) as red_16,
+            sum(red_17) as red_17,
+            sum(red_18) as red_18,
+            sum(red_19) as red_19,
+            sum(red_20) as red_20,
+            sum(red_21) as red_21,
+            sum(red_22) as red_22,
+            sum(red_23) as red_23,
+            sum(red_24) as red_24,
+            sum(red_25) as red_25,
+            sum(red_26) as red_26,
+            sum(red_27) as red_27,
+            sum(red_28) as red_28,
+            sum(red_29) as red_29,
+            sum(red_30) as red_30,
+            sum(red_31) as red_31,
+            sum(red_32) as red_32,
+            sum(red_33) as red_33,
+            sum(red_34) as red_34,
+            sum(red_35) as red_35,
+
+            sum(blue_01) as blue_01,
+            sum(blue_02) as blue_02,
+            sum(blue_03) as blue_03,
+            sum(blue_04) as blue_04,
+            sum(blue_05) as blue_05,
+            sum(blue_06) as blue_06,
+            sum(blue_07) as blue_07,
+            sum(blue_08) as blue_08,
+            sum(blue_09) as blue_09,
+            sum(blue_10) as blue_10,
+            sum(blue_11) as blue_11,
+            sum(blue_12) as blue_12
+        from db_uim.t_ball_recode
+        <where>
+            <if test="null != begin">
+              and period <![CDATA[ >= ]]>  #{begin,jdbcType=INTEGER}
+            </if>
+            <if test="null != end">
+              and period <![CDATA[ <= ]]>  #{end,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="boot:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="boot-2.0.1.RELEASE.war">
+      <element id="artifact" artifact-name="boot:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,34 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+.fd-content{
+    margin: 0 auto;
+    width:1000px;
+}
+.fd-head{
+    margin: 0 auto;
+    width: 100px;
+    height: 60px;
+}
+.fd-title{
+    font: 14px solid red;
+}
+.fd-period{
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 50px;
+    width: 600px;
+}
+.fd-data{
+    margin: 0 auto;
+}
+#chart1{
+    width: 800px;
+    height: 400px;
+}
+#chart2{
+    margin-top: 20px;
+    width: 800px;
+    height: 400px;
+}

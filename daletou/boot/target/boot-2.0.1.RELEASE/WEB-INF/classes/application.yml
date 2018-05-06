@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/test_db
+    username: puao
+    password: 6789@jkl
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /**
+
+
+mybatis:
+  type-aliases-package: com.puao.bean
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*.xml

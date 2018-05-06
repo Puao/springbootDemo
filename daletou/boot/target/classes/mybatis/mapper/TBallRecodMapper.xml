@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.puao.dao.BallRecodMapper">
+    <resultMap id="BaseResultMap" type="com.puao.bean.BallRecod">
+        <id column="period" property="period" jdbcType="INTEGER"/>
+
+
+        <result column="red_total" property="red_total" jdbcType="INTEGER"/>
+        <result column="red_avg" property="red_avg" jdbcType="DOUBLE"/>
+        <result column="blue_total" property="blue_total" jdbcType="INTEGER"/>
+        <result column="blue_avg" property="blue_avg" jdbcType="DOUBLE"/>
+        <result column="all_total" property="all_total" jdbcType="INTEGER"/>
+        <result column="all_avg" property="all_avg" jdbcType="DOUBLE"/>
+        <result column="odd_even_r" property="odd_even_r" jdbcType="VARCHAR"/>
+        <result column="odd_even_b" property="odd_even_b" jdbcType="VARCHAR"/>
+
+
+
+    </resultMap>
+    <sql id="Base_Column_List">
+		period,red_total,red_avg,blue_total,blue_avg,all_total,all_avg,odd_even_r,odd_even_b
+	</sql>
+
+    <!-- 查询唯一一条记录 -->
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from db_uim.t_ball_count
+        <where>
+            <if test="period != null and period !=''">
+                and period = #{period,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY period ASC
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.puao.bean.BallRecod">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM db_uim.t_ball_count
+        ORDER BY PERIOD ASC
+    </select>
+
+    <insert id="insertOrUpdate" parameterType="java.util.List">
+        INSERT INTO db_uim.t_ball_count(
+        period,red_total,red_avg,blue_total,blue_avg,all_total,all_avg,odd_even_r,odd_even_b
+        )
+        VALUES
+        <foreach collection="list" item="item"  index="index" open=""
+                 separator="," close="">
+            (
+            #{item.period,jdbcType=INTEGER},
+            #{item.red_total,jdbcType=INTEGER},#{item.red_avg,jdbcType=DOUBLE},#{item.blue_total,jdbcType=INTEGER},
+            #{item.blue_avg,jdbcType=DOUBLE},#{item.all_total,jdbcType=INTEGER},#{item.all_avg,jdbcType=DOUBLE},
+            #{item.odd_even_r,jdbcType=VARCHAR},#{item.odd_even_b,jdbcType=VARCHAR}
+            )
+        </foreach>
+        ON conflict (period)
+        DO UPDATE SET
+        red_total = EXCLUDED.red_total,
+        red_avg = EXCLUDED.red_avg,
+        blue_total = EXCLUDED.blue_total,
+        blue_avg = EXCLUDED.blue_avg,
+        all_total = EXCLUDED.all_total,
+        all_avg = EXCLUDED.all_avg,
+        odd_even_r = EXCLUDED.odd_even_r,
+        odd_even_b = EXCLUDED.odd_even_b
+    </insert>
+
+    <select id="selectMaxPeriod" resultType="java.lang.Integer">
+        SELECT MAX(period) FROM db_uim.t_ball_count
+    </select>
+
+
+</mapper>
